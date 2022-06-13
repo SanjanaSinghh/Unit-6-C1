@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+</head>
+<style>
+    #main{
+        margin-left: 20%;
+        width: 40%;
+        padding: 10%;
+    }
+</style>
+<body>
+<h1><a href="./pro.html">All product</a></h1>
+    <div id="main">
+<label>Title</label><br>
+    <input type="text" name="" id="title"><br/>
+    <label>Price</label><br>
+    <input type="number" name="" id="price"><br/>
+    <label> category</label><br>
+    <input type="text" name="" id="category"><br/>
+    <label> Image</label><br>
+    <input type="text" name="" id="image"><br/>
+    <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select><br/><br>
+    <button onclick="item()">Add </button>
+    </div>
+</body>
+
+<script>
+     function item(){
+        var obj= {"title": document.getElementById("title").value,
+    "gender": document.getElementById("gender").value,
+    "price": document.getElementById("price").value,
+    "category": document.getElementById("category").value,
+    "image": document.getElementById("image").value
+        }
+    
+
+    
+fetch('http://localhost:3000/product',{
+    method:"POST",
+    body:JSON.stringify(obj),
+    headers:{
+        'Content-Type':"application/json"
+    }
+})
+
+alert("Adeed")
+ }
+</script>
+</html>

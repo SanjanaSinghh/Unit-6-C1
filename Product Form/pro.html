@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <h1><a href="./home.html">Add product</a></h1>
+    <div id="show">
+        <img src="" alt="" style="height:200px;width:200px">
+        <h4></h4>
+        <p></p>
+    </div>
+
+    <button
+    onclick="p(-1)" id="pre">Pre</button>
+    <button onclick="p(+1)" id="po">Next</button>
+</body>
+<script>
+    var item
+    fetch('http://localhost:3000/product')
+    .then((san)=>san.json())
+    .then((san)=>tp(san.length))
+    
+    function tp(x){
+        if(x%5>0)
+        page=x/5+1
+        else
+        page=x/5
+        
+    }
+
+z=1
+fetch(`http://localhost:3000/product?_page=${z}&_limit=5`)
+.then((x)=>x.json())
+.then((x)=>sh(x))
+
+function sh(x){
+    var all=document.querySelectorAll(".kumarishah")
+    all.forEach(e=>e.remove())
+    var st=document.getElementById("show")
+    x.forEach(e => {
+  div=document.createElement('div')
+  div.className="kumarishah"
+  div.innerHTML=`<img   style="height:200px;width:200px" src="${e.image}" alt="">
+        <h4>${e.title}</h4>
+        <p> Price:${e.price}</p>`       
+   
+   st.append(div)
+    });
+}
+ function p(j){
+    z=z+j
+    
+    fetch(`http://localhost:3000/product?_page=${z}&_limit=5`)
+.then((x)=>x.json())
+.then((x)=>sh(x))
+ }
+
+ 
+
+
+
+</script>
+</html>
